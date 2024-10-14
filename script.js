@@ -50,23 +50,23 @@ let media = (b1 * pesos[0] + b2 * pesos[1] + b3 * pesos[2] + b4 * pesos[3]) / to
 if (b1 && b2 && b3 && b4) {
     // Todas as notas foram inseridas
     if (media >= 60) {
-        document.getElementById('resultado').innerText = "APROVADO";
+        document.getElementById('resultado').innerText = `APROVADO. Sua média foi ${Math.ceil(media)}`;
     } else {
         // Lógica do notaRecuperacao
         const notaNecessaria = notaRecuperacao(b1, b2, b3, b4);
-        document.getElementById('resultado').innerText = `REPROVADO. Você precisa de ${Math.floor(Math.max(0, notaNecessaria))} na recuperação.`;
+        document.getElementById('resultado').innerText = `REPROVADO. Sua média foi ${Math.ceil(media)}. Você precisa de ${Math.floor(notaNecessaria)} na recuperação.`;
 
     }
 } else if (b1 && b2 && b3) {
     // Três bimestres preenchidos
     const notaFaltante = (60 * totalPesos - (b1 * pesos[0] + b2 * pesos[1] + b3 * pesos[2])) / pesos[3];
-    document.getElementById('resultado').innerText = `PRECISA DE ${Math.floor(Math.max(0, notaFaltante))} NO 4º BIMESTRE.`;
+    document.getElementById('resultado').innerText = `PRECISA DE ${Math.floor(notaFaltante)} NO 4º BIMESTRE. Sua média atual é ${Math.ceil(media)}.`;
 
 } else if (b1 && b2) {
     // Dois bimestres preenchidos
     const nota3 = (60 * totalPesos - (b1 * pesos[0] + b2 * pesos[1])) / (pesos[2] + pesos[3]);
     const nota4 = (60 * totalPesos - (b1 * pesos[0] + b2 * pesos[1] + nota3 * pesos[2])) / pesos[3];
-    document.getElementById('resultado').innerText = `PRECISA DE ${Math.floor(Math.max(0, nota3))} NO 3º E ${Math.floor(Math.max(0, nota4))} NO 4º BIMESTRE.`;
+    document.getElementById('resultado').innerText = `PRECISA DE ${Math.floor(nota3)} NO 3º E ${Math.floor(nota4)} NO 4º BIMESTRE. Sua média atual é ${Math.ceil(media)}.`;
 
 } else {
     document.getElementById('resultado').innerText = "Preencha pelo menos o 1º e 2º Bimestre.";
